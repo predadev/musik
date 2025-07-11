@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nos Musique</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Special Elite', cursive;
+      background-color: #FFD700; /* jaune */
+      color: #000000; /* noir */
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+    }
+
+    .music-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .track {
+      background: #fff;
+      border: 2px solid #000;
+      border-radius: 10px;
+      width: 250px;
+      padding: 10px;
+      box-shadow: 4px 4px 0 #000;
+    }
+
+    .track img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .track h2 {
+      font-size: 1.2em;
+      margin: 10px 0 5px;
+    }
+
+    audio {
+      width: 100%;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Nos Musique</h1>
+  <div class="music-list">
+
+    <!-- Exemple de morceau 1 -->
+    <div class="track">
+      <img src="musik/audio/image/logo1.jpg" alt="Cover 1">
+      <h2>Ma Chanson 1</h2>
+      <audio controls>
+        <source src="musik/audio/chanson1.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas l'audio HTML5.
+      </audio>
+    </div>
+
+    <!-- Exemple de morceau 2 -->
+    <div class="track">
+      <img src="musik/audio/image/logo2.jpg" alt="Cover 2">
+      <h2>Ma Chanson 2</h2>
+      <audio controls>
+        <source src="musik/audio/chanson2.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas l'audio HTML5.
+      </audio>
+    </div>
+
+    <!-- Ajoute plus de morceaux ci-dessous -->
+    
+  </div>
+</body>
+</html>
