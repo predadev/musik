@@ -1,0 +1,1 @@
+{"Jeudi":3,"Vendredi":2,"Mardi":1,"Mercredi":1}

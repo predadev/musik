@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inscription Newsletter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #000;
+      color: #ffdd00;
+      font-family: 'Special Elite', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .container {
+      background: #111;
+      border: 3px solid #ffdd00;
+      border-radius: 12px;
+      padding: 30px;
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+      box-shadow: 0 0 12px #ffdd00;
+      animation: slideFadeIn 1s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes slideFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 2px solid #ffdd00;
+      background-color: #222;
+      color: #ffdd00;
+      margin-bottom: 15px;
+      animation: fadeIn 1.5s ease-in-out 0.5s;
+      animation-fill-mode: both;
+    }
+
+    input::placeholder {
+      color: #ffdd0099;
+    }
+
+    button {
+      background-color: #ffdd00;
+      color: #000;
+      font-weight: bold;
+      font-family: 'Special Elite', monospace;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      width: 100%;
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e6c900;
+      transform: scale(1.05);
+    }
+
+    #retour {
+      background-color: transparent;
+      color: #ffdd00;
+      border: 2px solid #ffdd00;
+    }
+
+    #retour:hover {
+      background-color: #ffdd00;
+      color: #000;
+    }
+
+    .message {
+      font-weight: bold;
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 6px;
+      display: none;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.4s ease;
+    }
+
+    .message.visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .success {
+      color: #00ff55;
+      border: 2px solid #00ff55;
+      background: #002a11;
+    }
+
+    .error {
+      color: #ff4444;
+      border: 2px solid #ff4444;
+      background: #2a0000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Inscris-toi à la newsletter</h1>
+    <form id="inscriptionForm" method="POST" action="newsletter.php">
+      <input type="email" id="email" name="email" placeholder="Ton adresse email" required />
+      <button type="submit">S’abonner</button>
+    </form>
+    <button id="retour" onclick="window.location.href='https://roger-pirate.mywebcommunity.org'">Retour</button>
+    <div id="message" class="message"></div>
+  </div>
+<script>
+  const form = document.getElementById("inscriptionForm");
+  const messageDiv = document.getElementById("message");
+
+  // Validation locale avant envoi
+  form.addEventListener("submit", function(event) {
+    const email = document.getElementById("email").value.trim();
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+    if (!regex.test(email)) {
+      event.preventDefault();
+      showMessage("⚠️ Adresse email invalide.", "error");
+    }
+  });
+
+  // Fonction pour afficher un message
+  function showMessage(text, type) {
+    messageDiv.textContent = text;
+    messageDiv.className = `message ${type} visible`;
+  }
+
+  // Lire les paramètres dans l'URL pour afficher les messages
+  const params = new URLSearchParams(window.location.search);
+  if (params.has("success")) {
+    showMessage("✅ Vous êtes bien inscrit à la newsletter.", "success");
+    history.replaceState(null, "", window.location.pathname); // Supprimer ?success de l'URL
+  } else if (params.has("exists")) {
+    showMessage("ℹ️ Vous êtes déjà inscrit à la newsletter.", "error");
+    history.replaceState(null, "", window.location.pathname);
+  } else if (params.has("error")) {
+    showMessage("⚠️ Adresse email invalide.", "error");
+    history.replaceState(null, "", window.location.pathname);
+  }
+</script>
+</body>
+</html>
